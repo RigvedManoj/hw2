@@ -76,5 +76,24 @@ public class TestExample {
         double totalCost = getTotalCost();
         assertEquals(0.00, totalCost, 0.01);
     }
+
+    @Test
+    public void testImmutableTransactions(){
+
+        //Make a copy of the transactions List
+        List<Transaction> copyTransactions = model.getTransactions();
+
+        //Add a transaction to the copy
+        Transaction addedTransaction = new Transaction(50.00, "Groceries");
+        copyTransactions.add(addedTransaction);
+
+        //List of transactions contains one transaction
+        assertEquals(1, copyTransactions.size());
+
+        //Check the list of transactions in model has not changed
+        assertEquals(0, model.getTransactions().size());
+
+
+    }
     
 }
