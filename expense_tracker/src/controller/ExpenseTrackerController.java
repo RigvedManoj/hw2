@@ -44,6 +44,25 @@ public class ExpenseTrackerController {
     refresh();
     return true;
   }
-  
+
+  public boolean removeTransaction(int selectedRow) {
+
+    //Check if valid row is selected
+    if(selectedRow == -1 || selectedRow >= model.getTransactions().size()){
+      return false;
+    }
+
+    //Get transaction for selected row
+    Transaction removeTransaction = model.getTransactions().get(selectedRow);
+
+    //Remove transaction from transactions list
+    model.removeTransaction(removeTransaction);
+
+    //Remove transaction from view table
+    view.getTableModel().removeRow(selectedRow);
+
+    refresh();
+    return true;
+  }
   // Other controller methods
 }

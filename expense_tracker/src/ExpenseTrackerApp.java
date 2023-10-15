@@ -34,6 +34,21 @@ public class ExpenseTrackerApp {
       }
     });
 
+    // Handles remove transaction button clicks
+    view.getRemoveTransactionBtn().addActionListener(e -> {
+
+      // Get row selected by user from view
+      int selectedRow = view.getTranscationsTable().getSelectedRow();
+
+      // Call controller to remove transaction
+      boolean added = controller.removeTransaction(selectedRow);
+
+      if (!added) {
+        JOptionPane.showMessageDialog(view, "Invalid row selected");
+        view.toFront();
+      }
+    });
+
   }
 
 }
