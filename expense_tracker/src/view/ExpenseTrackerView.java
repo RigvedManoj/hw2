@@ -152,6 +152,5 @@ public class ExpenseTrackerView extends JFrame {
   public void highlightTable(List<Integer> filteredTransactionRows) {
     transactionsTable.setDefaultRenderer(Object.class, new Highlighter(filteredTransactionRows));
     transactionsTable.updateUI();
-
   }
 }

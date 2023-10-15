@@ -1,4 +1,6 @@
 # Ignore build folders
+*/.idea/
+*/hw2.iml
 jdoc/
 bin/
 

@@ -39,7 +39,15 @@ public class ExpenseTrackerApp {
 
       switch(FilterChoice){
         case "Category":{
-          boolean filtered = controller.filterTransaction(FilterValue);
+          boolean filtered = controller.filterCategoryTransaction(FilterValue);
+          if (!filtered) {
+            JOptionPane.showMessageDialog(view, "Invalid filter entered");
+            view.toFront();
+          }
+          break;
+        }
+        case "Amount":{
+          boolean filtered = controller.filterAmountTransaction(FilterValue);
           if (!filtered) {
             JOptionPane.showMessageDialog(view, "Invalid filter entered");
             view.toFront();
