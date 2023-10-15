@@ -2,8 +2,7 @@ package model;
 
 import java.util.List;
 
+// Interface for all Filter Classes
 public interface TransactionFilter {
-    public static List<Transaction> filter(List<Transaction> transactions, String filterValue) {
-        return null;
-    }
+    List<Integer> filter(List<Transaction> transactions, String filterValue);
 }

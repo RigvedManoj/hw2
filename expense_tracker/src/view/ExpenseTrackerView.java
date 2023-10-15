@@ -20,8 +20,9 @@ public class ExpenseTrackerView extends JFrame {
 
   // Create Filter fields
   private JTextField filterField;
-  private JButton filterFieldBtn;
   private JComboBox<String> filterChoice;
+  private JButton filterBtn;
+
 
   public ExpenseTrackerView() {
     setTitle("Expense Tracker"); // Set title
@@ -43,11 +44,13 @@ public class ExpenseTrackerView extends JFrame {
     categoryField = new JTextField(10);
 
     // Create Filter Components
-    JLabel filterLabel = new JLabel("Filter:");
+    JLabel filterLabel = new JLabel("Filter: ");
     filterField = new JTextField(10);
-    filterFieldBtn = new JButton("Filter");
+
     String[] choices = { "Amount","Category"};
-    filterChoice = new JComboBox<String>(choices);
+    filterChoice = new JComboBox<>(choices);
+
+    filterBtn = new JButton("Filter");
 
     // Create table
     transactionsTable = new JTable(model);
@@ -63,13 +66,14 @@ public class ExpenseTrackerView extends JFrame {
     inputPanel.add(filterLabel);
     inputPanel.add(filterChoice);
     inputPanel.add(filterField);
+
     inputPanel.add(addTransactionBtn);
   
     JPanel buttonPanel = new JPanel();
     buttonPanel.add(addTransactionBtn);
 
     // Add Filter Button
-    buttonPanel.add(filterFieldBtn);
+    buttonPanel.add(filterBtn);
 
     // Add panels to frame
     add(inputPanel, BorderLayout.NORTH);
@@ -137,8 +141,8 @@ public class ExpenseTrackerView extends JFrame {
     this.categoryField = categoryField;
   }
 
-  public JButton getFilterFieldBtn() {
-    return filterFieldBtn;
+  public JButton getFilterBtn() {
+    return filterBtn;
   }
 
   public String getFilterField() {
@@ -149,6 +153,7 @@ public class ExpenseTrackerView extends JFrame {
     return Objects.requireNonNull(filterChoice.getSelectedItem()).toString();
   }
 
+  // To make GUI change to highlight filtered rows
   public void highlightTable(List<Integer> filteredTransactionRows) {
     transactionsTable.setDefaultRenderer(Object.class, new Highlighter(filteredTransactionRows));
     transactionsTable.updateUI();
