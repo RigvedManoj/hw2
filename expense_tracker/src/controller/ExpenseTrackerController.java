@@ -1,7 +1,9 @@
 package controller;
 
+import model.CategoryFilter;
 import view.ExpenseTrackerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,6 +46,16 @@ public class ExpenseTrackerController {
     refresh();
     return true;
   }
-  
+
+  public boolean filterTransaction(String categoryFilterValue) {
+    if (!InputValidation.isValidCategory(categoryFilterValue)) {
+      return false;
+    }
+    List<Integer> filteredTransactionRows = new ArrayList<>();
+    filteredTransactionRows = CategoryFilter.filter(model.transactions,categoryFilterValue);
+    view.highlightTable(filteredTransactionRows);
+    return true;
+  }
+
   // Other controller methods
 }
