@@ -1,16 +1,11 @@
 package controller;
 
-import model.AmountFilter;
-import model.CategoryFilter;
+import model.*;
 import view.ExpenseTrackerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-import model.ExpenseTrackerModel;
-import model.Transaction;
 public class ExpenseTrackerController {
   
   private ExpenseTrackerModel model;
@@ -48,22 +43,24 @@ public class ExpenseTrackerController {
     return true;
   }
 
-  public boolean filterCategoryTransaction(String categoryFilterValue) {
+  // To get filtered category transactions and highlight them
+  public boolean applyCategoryFilter(String categoryFilterValue) {
     if (!InputValidation.isValidCategory(categoryFilterValue)) {
       return false;
     }
-    List<Integer> filteredTransactionRows = new ArrayList<>();
-    filteredTransactionRows = CategoryFilter.filter(model.transactions,categoryFilterValue);
+    TransactionFilter categoryFilter = new CategoryFilter();
+    List<Integer> filteredTransactionRows = categoryFilter.filter(model.getTransactions(),categoryFilterValue);
     view.highlightTable(filteredTransactionRows);
     return true;
   }
 
-  public boolean filterAmountTransaction(String amountFilterValue) {
+  // To get filtered amount transactions and highlight them
+  public boolean applyAmountFilter(String amountFilterValue) {
     if (!InputValidation.isValidAmount(Double.parseDouble(amountFilterValue))) {
       return false;
     }
-    List<Integer> filteredTransactionRows = new ArrayList<>();
-    filteredTransactionRows = AmountFilter.filter(model.transactions,amountFilterValue);
+    TransactionFilter amountFilter = new AmountFilter();
+    List<Integer> filteredTransactionRows = amountFilter.filter(model.getTransactions(),amountFilterValue);
     view.highlightTable(filteredTransactionRows);
     return true;
   }
