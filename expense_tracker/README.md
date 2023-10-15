@@ -15,3 +15,20 @@ You should be able to view the GUI of the project upon successful compilation.
 
 ## Java Version
 This code is compiled with ```openjdk 17.0.7 2023-04-18```. Please update your JDK accordingly if you face any incompatibility issue.
+
+## Functionalities
+### CategoryFilter
+
+This functionality allows to filter transactions based on a category type.
+
+- Dropdown field to select filter-type.
+- Input field to input category value.
+- Highlights filtered transactions in green.
+
+### AmountFilter
+
+This functionality allows to filter transactions based on amount.
+
+- Dropdown field to select filter-type.
+- Input field to input amount value.
+- Highlights filtered transactions in green.
