@@ -1,5 +1,6 @@
 package controller;
 
+import model.AmountFilter;
 import model.CategoryFilter;
 import view.ExpenseTrackerView;
 
@@ -47,7 +48,7 @@ public class ExpenseTrackerController {
     return true;
   }
 
-  public boolean filterTransaction(String categoryFilterValue) {
+  public boolean filterCategoryTransaction(String categoryFilterValue) {
     if (!InputValidation.isValidCategory(categoryFilterValue)) {
       return false;
     }
@@ -57,5 +58,14 @@ public class ExpenseTrackerController {
     return true;
   }
 
+  public boolean filterAmountTransaction(String amountFilterValue) {
+    if (!InputValidation.isValidAmount(Double.parseDouble(amountFilterValue))) {
+      return false;
+    }
+    List<Integer> filteredTransactionRows = new ArrayList<>();
+    filteredTransactionRows = AmountFilter.filter(model.transactions,amountFilterValue);
+    view.highlightTable(filteredTransactionRows);
+    return true;
+  }
   // Other controller methods
 }
