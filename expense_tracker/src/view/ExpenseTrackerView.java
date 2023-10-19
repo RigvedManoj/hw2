@@ -7,6 +7,8 @@ import java.awt.*;
 import java.text.NumberFormat;
 
 import model.Transaction;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -103,9 +105,11 @@ public class ExpenseTrackerView extends JFrame {
         // Add total row
         Object[] totalRow = {"Total", null, null, totalCost};
         model.addRow(totalRow);
-  
+
+        List<Integer> emptyList = new ArrayList<>();
+        transactionsTable.setDefaultRenderer(Object.class, new Highlighter(emptyList));
       // Fire table update
-      transactionsTable.updateUI();
+        transactionsTable.updateUI();
 
     }
   public JButton getAddTransactionBtn() {

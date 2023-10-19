@@ -37,31 +37,14 @@ public class ExpenseTrackerApp {
       String FilterValue = view.getFilterField();
       String FilterChoice = view.getFilterChoice();
 
-      switch(FilterChoice){
-        case "Category":{
-          // Call controller to filter category transaction
-          boolean filtered = controller.applyCategoryFilter(FilterValue);
-          if (!filtered) {
-            JOptionPane.showMessageDialog(view, "Invalid category filter entered");
-            view.toFront();
-          }
-          break;
-        }
-        case "Amount":{
-          // Call controller to filter amount transaction
-          boolean filtered = controller.applyAmountFilter(FilterValue);
-          if (!filtered) {
-            JOptionPane.showMessageDialog(view, "Invalid amount filter entered");
-            view.toFront();
-          }
-          break;
-        }
-        default:{
-          break;
-        }
+      //Call controller to apply filter
+      boolean filtered = controller.applyFilter(FilterChoice, FilterValue);
+      if (!filtered) {
+        JOptionPane.showMessageDialog(view, "Invalid filter value entered");
+        controller.refresh();
+        view.toFront();
       }
     });
 
   }
-
 }

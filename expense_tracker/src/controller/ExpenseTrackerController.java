@@ -3,6 +3,7 @@ package controller;
 import model.*;
 import view.ExpenseTrackerView;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,26 +44,39 @@ public class ExpenseTrackerController {
     return true;
   }
 
-  // To get filtered category transactions and highlight them
-  public boolean applyCategoryFilter(String categoryFilterValue) {
-    if (!InputValidation.isValidCategory(categoryFilterValue)) {
-      return false;
+  // To filter transactions and highlight them
+  public boolean applyFilter(String FilterChoice, String FilterValue){
+    switch(FilterChoice){
+      case "Category":{
+        //Check if category value entered is valid
+        if (!InputValidation.isValidCategory(FilterValue)) {
+          return false;
+        }
+        TransactionFilter categoryFilter = new CategoryFilter();
+        //Call filter function to get rows to be highlighted
+        List<Integer> filteredTransactionRows = categoryFilter.filter(model.getTransactions(),FilterValue);
+        //Call view to highlight the table
+        view.highlightTable(filteredTransactionRows);
+        return true;
+      }
+      case "Amount":{
+        if (!InputValidation.isValidAmount(Double.parseDouble(FilterValue))) {
+          return false;
+        }
+        TransactionFilter amountFilter = new AmountFilter();
+        //Call filter function to get rows to be highlighted
+        List<Integer> filteredTransactionRows = amountFilter.filter(model.getTransactions(),FilterValue);
+        //Call view to highlight the table
+        view.highlightTable(filteredTransactionRows);
+        return true;
+      }
+      default:{
+        break;
+      }
+
     }
-    TransactionFilter categoryFilter = new CategoryFilter();
-    List<Integer> filteredTransactionRows = categoryFilter.filter(model.getTransactions(),categoryFilterValue);
-    view.highlightTable(filteredTransactionRows);
-    return true;
+    return false;
   }
 
-  // To get filtered amount transactions and highlight them
-  public boolean applyAmountFilter(String amountFilterValue) {
-    if (!InputValidation.isValidAmount(Double.parseDouble(amountFilterValue))) {
-      return false;
-    }
-    TransactionFilter amountFilter = new AmountFilter();
-    List<Integer> filteredTransactionRows = amountFilter.filter(model.getTransactions(),amountFilterValue);
-    view.highlightTable(filteredTransactionRows);
-    return true;
-  }
   // Other controller methods
 }
