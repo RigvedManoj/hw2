@@ -12,6 +12,14 @@ The app has a filtering functionality that lets the user filter the transactions
 #### Result:
 - The filtered transactions are highlighted in green.
 
+### 2. Undo transaction
+The app lets the user undo previously added transactions.
+#### User Input:
+- User clicks on the row that needs to be deleted.
+
+#### Result:
+- The selected transaction is removed from the transactions list and updated in table view.
+
 ## Compile
 
 To compile the code from terminal, use the following command:
